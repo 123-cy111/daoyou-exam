@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="导游测试">
+    <meta name="theme-color" content="#667eea">
+    <meta name="msapplication-TileColor" content="#667eea">
+    <meta name="description" content="导游资格考试在线练习系统，包含判断题、单选题、多选题的随机练习">
+    <meta name="keywords" content="导游考试,导游资格,旅游管理,考试练习">
+    <meta name="author" content="导游测试系统">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <meta name="format-detection" content="address=no">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta property="og:title" content="导游资格考试练习系统">
+    <meta property="og:description" content="专业的导游资格考试在线练习平台">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://daoyou-exam.vercel.app">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="stylesheet" href="style.css">
+    <title>导游资格考试练习系统 - 专业在线测试平台</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>导游大赛模拟测试</h1>
+            <p>随机抽题练习系统</p>
+        </header>
+        
+        <div id="loading-message" style="text-align: center; padding: 20px; color: #666;">
+            正在加载题目，请稍候...
+        </div>
+        
+        <div class="score-board">
+            <div class="score">得分: <span id="score">0</span>/10</div>
+            <div class="progress">进度: <span id="progress">0</span>/5</div>
+        </div>
+        
+        <div id="quiz-container">
+            <!-- 题目将在这里动态生成 -->
+        </div>
+        
+        <div class="controls">
+            <button id="submit-btn" onclick="checkAnswers()">提交答案</button>
+            <button id="reset-btn" onclick="resetQuiz()">重新抽题</button>
+            <button id="hint-btn" onclick="showHints()">查看解析</button>
+        </div>
+        
+        <div class="results" id="results">
+            <!-- 结果显示在这里 -->
+        </div>
+    </div>
+
+    <script src="./data/judgement.js"></script>
+    <script src="./data/single.js"></script>
+    <script src="./data/multiple.js"></script>
+    <script src="./script.js"></script>
+    
+    <script>
+        // 加载状态监控
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const loadingMessage = document.getElementById('loading-message');
+                const quizContainer = document.getElementById('quiz-container');
+                
+                if (quizContainer.children.length === 0) {
+                    loadingMessage.innerHTML = '<p style="color: red;">题目加载失败，请刷新页面重试</p>';
+                    console.error('题目加载失败');
+                } else {
+                    loadingMessage.style.display = 'none';
+                }
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
